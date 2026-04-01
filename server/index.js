@@ -7,12 +7,22 @@ const express = require("express");
 const { connectToMongoDB } = require("./database");
 const path = require('path');
 
-const app = express();
-app.use(express.json());
+const path = require('path');
 
-app.use(express.static(path.join(__dirname, 'build')));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'build/index.html'));
+// 1. Hanapin ang tamang path papunta sa 'dist' folder
+const frontendBuildPath = path.join(__dirname, '..', 'client', 'vite-project', 'dist');
+
+// 2. I-serve ang static files
+app.use(express.static(frontendBuildPath));
+
+// 3. I-handle ang lahat ng routing sa frontend
+app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendBuildPath, 'index.html'), (err) => {
+        if (err) {
+            console.error("Error sending index.html:", err);
+            res.status(500).send("Frontend build not found. Check your paths.");
+        }
+    });
 });
 
 const router = require("./routes");
