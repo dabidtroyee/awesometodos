@@ -18,7 +18,7 @@ export default function App() {
   // Function para magdagdag ng bagong Todo
   const createNewTodo = async (e) => {
     e.preventDefault();
-    if (content.trim().length > 1) {
+    if (content.trim().length === 0) {
       const res = await fetch("/api/todos", {
         method: "POST",
         body: JSON.stringify({ todo: content }),
