@@ -6,6 +6,7 @@ require("dotenv").config();
 const express = require("express");
 const { connectToMongoDB } = require("./database");
 const path = require('path');
+const app = express();
 
 // Ituro sa tamang 'dist' folder ng Vite
 const buildPath = path.join(__dirname, '..', 'client', 'vite-project', 'dist');
