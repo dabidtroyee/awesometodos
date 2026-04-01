@@ -21,7 +21,7 @@ app.use(express.static(buildPath));
 
 // 4. Wildcard Route (DAPAT ITO ANG PINAKAHULI)
 // Ito ang sasagot sa lahat ng request na hindi dumaan sa /api
-app.get('*', (req, res) => {
+app.get('*path', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
 
